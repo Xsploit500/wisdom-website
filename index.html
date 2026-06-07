@@ -1020,6 +1020,41 @@ body.light .exp-logo.uapb-logo {
   to   { opacity: 1; transform: translateY(0) scale(1); }
 }
 
+
+/* DEFINITIVE MOBILE HOME FIX */
+@media (max-width: 768px) {
+  .home-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    padding: 32px 20px 48px !important;
+    gap: 24px !important;
+  }
+  .home-photo-wrap {
+    order: -1 !important;
+    width: 85% !important;
+    max-width: 320px !important;
+    margin: 0 auto !important;
+    display: block !important;
+  }
+  .home-photo-frame {
+    height: auto !important;
+    aspect-ratio: 3/4 !important;
+    border-radius: 4px 4px 40px 4px !important;
+    width: 100% !important;
+  }
+  .home-photo {
+    object-fit: contain !important;
+    object-position: center !important;
+    animation: none !important;
+    transform: none !important;
+  }
+  .home-left {
+    width: 100% !important;
+    text-align: center !important;
+  }
+}
+
 </style>
 </head>
 <body>
