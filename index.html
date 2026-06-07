@@ -69,7 +69,7 @@ nav{
   display:inline-block;padding:11px 26px;
   background:var(--accent);color:var(--bg);
   font-family:'DM Mono',monospace;font-size:12px;font-weight:500;
-  border:none;border-radius:100px;cursor:pointer;
+  border:none;border-radius:6px;cursor:pointer;
   letter-spacing:0.04em;transition:opacity 0.2s,transform 0.15s;
 }
 .btn-primary:hover{opacity:0.82;transform:translateY(-1px)}
@@ -77,7 +77,7 @@ nav{
   display:inline-block;padding:11px 26px;
   background:transparent;color:var(--text2);
   font-family:'DM Mono',monospace;font-size:12px;
-  border:0.5px solid var(--border2);border-radius:100px;
+  border:0.5px solid var(--border2);border-radius:6px;
   cursor:pointer;letter-spacing:0.04em;
   transition:border-color 0.2s,color 0.2s;
 }
@@ -436,7 +436,7 @@ body.light .project-card {
   gap: clamp(4px, 0.6vw, 8px);
   background: transparent;
   border: 0.5px solid var(--border2);
-  border-radius: 100px;
+  border-radius: 6px;
   padding: clamp(4px, 0.5vw, 6px) clamp(8px, 1.2vw, 14px);
   cursor: pointer;
   font-family: 'DM Mono', monospace;
@@ -459,7 +459,7 @@ body.light .project-card {
   color: var(--accent);
   border: 0.5px solid var(--border2);
   padding: clamp(4px, 0.5vw, 6px) clamp(10px, 1.4vw, 18px);
-  border-radius: 100px;
+  border-radius: 6px;
   letter-spacing: 0.06em;
   transition: background 0.2s, color 0.2s;
   white-space: nowrap;
@@ -502,16 +502,15 @@ body.light .project-card {
   /* HOME */
   .home-grid {
     grid-template-columns: 1fr;
-    padding: 24px 20px 48px;
-    gap: 36px;
+    padding: 12px 20px 48px;
+    gap: 24px;
     min-height: auto;
-    padding-top: 80px;
+    padding-top: 72px;
   }
-  .home-photo-wrap {
-    order: -1;
-  }
+  
   .home-photo-frame {
-    height: 380px;
+    height: auto;
+    aspect-ratio: 3/4;
     border-radius: 4px 4px 48px 4px;
   }
   .home-photo-badge {
@@ -720,6 +719,7 @@ body.light .project-card {
     font-size: 10px;
     padding: 5px 10px;
     display: inline-block;
+    border-radius: 6px;
   }
   .theme-toggle {
     display: flex;
@@ -759,12 +759,13 @@ body.light .project-card {
 
   .home-grid {
     grid-template-columns: 1fr;
-    padding: 80px 20px 48px;
-    gap: 32px;
+    padding: 32px 20px 48px;
+    gap: 24px;
     min-height: auto;
+    justify-items: center;
   }
-  .home-photo-wrap { order: -1; }
-  .home-photo-frame { height: 360px; border-radius: 4px 4px 40px 4px; }
+  .home-photo-wrap { order: -1; width: 100%; max-width: 400px; margin: 0 auto; display: block; }
+  .home-photo-frame { height: auto; aspect-ratio: 2/3; border-radius: 4px 4px 40px 4px; }
   .home-photo-badge { bottom: -14px; left: 12px; font-size: 10px; padding: 9px 12px; }
   .home-photo-badge strong { font-size: 11px; }
   h1.home-name { font-size: 44px; }
@@ -955,6 +956,70 @@ body.light .exp-logo.uapb-logo {
   .carousel-wrap { border-radius: 4px 4px 40px 4px; aspect-ratio: 3/4; }
 }
 
+
+@media (max-width: 768px) {
+  .home-photo {
+    object-fit: contain;
+    object-position: center;
+    animation: none;
+    transform: none;
+  }
+  .home-photo-frame::after {
+    background: linear-gradient(to top, rgba(24,21,15,0.2) 0%, transparent 40%);
+  }
+}
+
+
+@media (max-width: 768px) {
+  .home-grid {
+    text-align: center;
+  }
+  .home-eyebrow {
+    justify-content: center;
+  }
+  .home-actions {
+    justify-content: center;
+  }
+  .home-stats {
+    justify-content: center;
+  }
+  .home-desc {
+    margin: 0 auto 24px;
+  }
+}
+
+/* Home page sequential text animations */
+.home-eyebrow,
+.home-name,
+.home-subtitle,
+.home-desc,
+.home-actions,
+.home-stats {
+  opacity: 0;
+  transform: translateY(28px);
+}
+.home-eyebrow.anim-in  { animation: slideUp 0.6s cubic-bezier(0.22,1,0.36,1) 0.1s both; }
+.home-name.anim-in     { animation: slideUp 0.6s cubic-bezier(0.22,1,0.36,1) 0.25s both; }
+.home-subtitle.anim-in { animation: slideUp 0.6s cubic-bezier(0.22,1,0.36,1) 0.4s both; }
+.home-desc.anim-in     { animation: slideUp 0.6s cubic-bezier(0.22,1,0.36,1) 0.52s both; }
+.home-actions.anim-in  { animation: slideUp 0.6s cubic-bezier(0.22,1,0.36,1) 0.64s both; }
+.home-stats.anim-in    { animation: slideUp 0.6s cubic-bezier(0.22,1,0.36,1) 0.78s both; }
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Home photo entrance */
+.home-photo-wrap {
+  opacity: 0;
+  animation: photoEntrance 0.9s cubic-bezier(0.22,1,0.36,1) 0.15s both;
+}
+@keyframes photoEntrance {
+  from { opacity: 0; transform: translateY(32px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
 </style>
 </head>
 <body>
@@ -1041,9 +1106,9 @@ body.light .exp-logo.uapb-logo {
       </div>
       <div class="fade-up" style="transition-delay:0.1s">
         <div class="about-text-col">
-          <p>I am Wisdom, a <strong>Computer Science and Finance</strong> graduate from the University of Arkansas at Pine Bluff, class of Spring 2026. I operate at the intersection of founding, engineering, and markets: building things that are real, not theoretical.</p>
-          <p>At <strong>Microsoft</strong>, I built a cloud capacity management system for the Azure Container Instances team that saved ~$10,000/month. At <strong>Walton Enterprises</strong>, I built full-stack data tools handling 5,000+ records. I have competed twice in the National HBCU Stock Market Challenge, placing <strong>3rd out of 70+ participants</strong> using quantitative strategies in 2026.</p>
-          <p>Right now I am building <strong>Tether</strong>, an AI-powered relationship reminder app. I think the best companies are built by people who can go deep on the product, the technology, and the business at the same time. That's what I am training for.</p>
+          <p>I'm Wisdom, a <strong>Computer Science and Finance</strong> graduate from the University of Arkansas at Pine Bluff, class of Spring 2026. I operate at the intersection of founding, engineering, and markets: building things that are real, not theoretical.</p>
+          <p>At <strong>Microsoft</strong>, I built a cloud capacity management system for the Azure Container Instances team that saved ~$10,000/month. At <strong>Walton Enterprises</strong>, I built full-stack data tools handling 5,000+ records. I've competed twice in the National HBCU Stock Market Challenge, placing <strong>3rd out of 70+ participants</strong> using quantitative strategies in 2026.</p>
+          <p>Right now I'm building <strong>Tether</strong>, an AI-powered relationship reminder app. I think the best companies are built by people who can go deep on the product, the technology, and the business at the same time. That's what I'm training for.</p>
           <blockquote>I build things that compound. Every project should leave something better than it found it: in the codebase, the portfolio, or the product.</blockquote>
           <p style="font-size:12px;color:var(--text3)">Currently in: Pine Bluff, AR</p>
         </div>
@@ -1213,7 +1278,7 @@ body.light .exp-logo.uapb-logo {
     <div class="section-tag">Contact</div>
     <h1 class="page-title">Let's build<br><em>something.</em></h1>
     <div class="divider" style="margin-top:28px"></div>
-    <p class="contact-intro">Building at the intersection of founding, finance, and engineering. If you are working on something interesting, or just want to talk, my inbox is always open.</p>
+    <p class="contact-intro">Building at the intersection of founding, finance, and engineering. If you're working on something interesting, or just want to talk shop, my inbox is always open.</p>
     <div class="contact-group fade-up">
       <div class="contact-group-label">reach out</div>
       <a class="contact-row" href="mailto:wisdomaria4@gmail.com"><div><div class="contact-label">Email</div><div class="contact-val">wisdomaria4@gmail.com</div></div><span class="contact-arrow">→</span></a>
@@ -1242,6 +1307,7 @@ function showPage(name) {
   if (nl) nl.classList.add('active');
   window.scrollTo(0, 0);
   updateMobileMenu(name);
+  if (name === 'home') { setTimeout(triggerHomeAnimations, 30); }
   setTimeout(() => {
     document.querySelectorAll('#page-' + name + ' .fade-up').forEach((el, i) => {
       setTimeout(() => el.classList.add('in'), i * 80);
@@ -1266,6 +1332,7 @@ setTimeout(() => {
   document.querySelectorAll('#page-home .fade-up').forEach((el, i) => {
     setTimeout(() => el.classList.add('in'), i * 80);
   });
+  triggerHomeAnimations();
 }, 100);
 
 function toggleTheme() {
@@ -1384,6 +1451,16 @@ function carouselPrev() { goToSlide(currentSlide - 1); }
 var origShowPage = showPage;
 
 carouselInit();
+
+function triggerHomeAnimations() {
+  var els = document.querySelectorAll('.home-eyebrow, .home-name, .home-subtitle, .home-desc, .home-actions, .home-stats');
+  els.forEach(function(el) {
+    el.classList.remove('anim-in');
+    void el.offsetWidth;
+    el.classList.add('anim-in');
+  });
+}
+
 </script>
 </body>
 </html>
