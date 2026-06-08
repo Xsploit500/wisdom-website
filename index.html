@@ -443,6 +443,7 @@ body.light .project-card {
   font-size: clamp(10px, 0.9vw, 12px);
   color: var(--text3);
   letter-spacing: 0.06em;
+  line-height: 1;
   transition: border-color 0.2s, color 0.2s, background 0.2s;
   white-space: nowrap;
 }
@@ -455,12 +456,15 @@ body.light .project-card {
   line-height: 1;
 }
 .nav-cta {
+  display: flex;
+  align-items: center;
   font-size: clamp(10px, 0.9vw, 12px);
   color: var(--accent);
   border: 0.5px solid var(--border2);
-  padding: clamp(4px, 0.5vw, 6px) clamp(10px, 1.4vw, 18px);
+  padding: clamp(4px, 0.5vw, 6px) clamp(8px, 1.2vw, 14px);
   border-radius: 6px;
   letter-spacing: 0.06em;
+  line-height: 1;
   transition: background 0.2s, color 0.2s;
   white-space: nowrap;
 }
@@ -492,7 +496,7 @@ body.light .project-card {
   }
   .nav-cta {
     font-size: 10px;
-    padding: 5px 10px;
+    padding: 4px 8px;
   }
   .theme-toggle {
     font-size: 10px;
